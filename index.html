@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pucela Visual · Fotografía y vídeo en Valladolid</title>
+<meta name="description" content="Estudio de fotografía y vídeo en Valladolid.">
+<meta name="theme-color" content="#23272A">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon-192.png">
+<style>
+@font-face{font-family:Outfit;font-weight:400;font-display:swap;src:url(assets/fonts/outfit-400.woff2) format("woff2")}
+@font-face{font-family:Outfit;font-weight:500;font-display:swap;src:url(assets/fonts/outfit-500.woff2) format("woff2")}
+:root{--c:#23272A;--p:#ECEBE7;--m:#8B77A8;--g:#5E6360;--gd:#A9ADAA;--l:#C4C7C2;--f:Outfit,"Helvetica Neue",Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--p);color:var(--c);font:400 1.125rem/1.6 var(--f)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--m);outline-offset:3px}
+.w{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+/* Portada */
+.hero{min-height:100vh;min-height:100svh;background:var(--c);display:flex;align-items:center;justify-content:center;position:relative}
+.lock{display:flex;align-items:center;gap:clamp(16px,3vw,34px)}
+.lock svg{width:clamp(110px,17vw,200px);height:auto;aspect-ratio:120/112;overflow:visible}
+.tx{font-size:clamp(46px,8.4vw,104px);line-height:1.05;letter-spacing:-.02em}
+.tx b{display:block;font-weight:500;color:var(--p)}
+.tx span{display:block;font-weight:400;color:var(--gd)}
+.chev{position:absolute;bottom:max(24px,env(safe-area-inset-bottom));left:50%;margin-left:-9px;opacity:0}
+.a1,.a2,.t1,.t2{opacity:0}
+.go .a1{animation:in1 .9s cubic-bezier(.2,.8,.2,1) forwards}
+.go .a2{animation:in2 .9s cubic-bezier(.2,.8,.2,1) forwards}
+.go .t1{animation:up .6s ease-out .9s forwards}
+.go .t2{animation:up .6s ease-out 1.1s forwards}
+.go .chev{animation:fade .6s ease-out 2.2s forwards,bob 1.6s ease-in-out 2.8s infinite}
+@keyframes in1{from{transform:translate(-80px,-55px);opacity:0}to{transform:none;opacity:1}}
+@keyframes in2{from{transform:translate(80px,55px);opacity:0}to{transform:none;opacity:1}}
+@keyframes up{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{to{opacity:.8}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@media(max-width:640px){.lock{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.a1,.a2,.t1,.t2{animation:none!important;opacity:1!important}.chev{animation:none!important;opacity:.8}}
+
+/* Menú */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(35,39,42,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transform:translateY(-100%);transition:transform .35s ease;padding-top:env(safe-area-inset-top)}
+nav.on{transform:none}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:56px}
+nav img{height:30px;display:block}
+nav ul{display:flex;align-items:center;gap:clamp(.9rem,3vw,2rem);list-style:none;margin:0;padding:0}
+nav a{color:var(--p);text-decoration:none;font-weight:500;font-size:1rem}
+nav li a:not(.cta)[aria-current]{text-decoration:underline;text-decoration-color:var(--m);text-decoration-thickness:2px;text-underline-offset:8px}
+nav .cta{background:var(--m);color:var(--c);padding:.35rem .95rem;border-radius:4px}
+
+section{padding:clamp(3.5rem,9vw,6.5rem) 0}
+h2{font-weight:500;font-size:clamp(2rem,5vw,3rem);letter-spacing:-.02em;line-height:1.1;margin:0 0 2rem}
+
+/* Trabajos */
+.gal{column-count:2;column-gap:12px}
+@media(min-width:900px){.gal{column-count:3;column-gap:16px}}
+.ph{display:block;position:relative;width:100%;margin:0 0 12px;padding:0;border:0;background:#D6D8D3;cursor:pointer;break-inside:avoid;overflow:hidden}
+@media(min-width:900px){.ph{margin-bottom:16px}}
+.ph img{display:block;width:100%;height:auto}
+.ph::before,.ph::after{content:"";position:absolute;width:30px;height:30px;border:3px solid;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+.ph::before{top:12px;left:12px;border-color:var(--p);border-right:0;border-bottom:0;border-radius:4px 0 0 0;transform:translate(8px,8px)}
+.ph::after{bottom:12px;right:12px;border-color:var(--m);border-left:0;border-top:0;border-radius:0 0 4px 0;transform:translate(-8px,-8px)}
+@media(hover:hover){.ph:hover::before,.ph:hover::after{opacity:1;transform:none}}
+.ph:focus-visible::before,.ph:focus-visible::after{opacity:1;transform:none}
+.ph.v{background:rgba(35,39,42,.05);cursor:default}
+.ph.v::before,.ph.v::after{opacity:1;transform:none;border-color:var(--c)}
+.soon{color:var(--g);margin:1.5rem 0 0}
+
+/* Visor de fotos */
+dialog{border:0;padding:0;background:var(--c);color:var(--p);width:100%;height:100%;max-width:none;max-height:none}
+dialog::backdrop{background:#000}
+.vis{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px 16px 24px}
+.vis img{max-width:100%;max-height:calc(100% - 44px);object-fit:contain;display:block}
+.vis p{margin:12px 0 0;min-height:1.6em;color:var(--gd);font-size:1rem;text-align:center}
+.vb{position:absolute;background:none;border:0;color:var(--p);font:500 1.1rem var(--f);cursor:pointer;padding:.8rem 1rem}
+.vb.x{top:8px;right:8px}.vb.pv,.vb.nx{top:50%;transform:translateY(-50%);font-size:2.2rem;line-height:1}
+.vb.pv{left:4px}.vb.nx{right:4px}.vc{position:absolute;top:18px;left:20px;color:var(--gd);font-size:.95rem}
+
+/* Nosotros */
+.dark{background:var(--c);color:var(--p)}
+.dark h2{color:var(--p)}
+.cols{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(2rem,6vw,5rem)}
+.lead{font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.4;margin:0;font-weight:400}
+.cr{display:grid;gap:1.8rem}
+.cr div{border-top:2px solid var(--m);padding-top:.9rem}
+.cr h3{font-weight:500;font-size:1.3rem;margin:0 0 .35rem}
+.cr p{margin:0;color:var(--gd)}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+
+/* Contacto */
+.ct p{margin:-1rem 0 2rem;color:var(--g)}
+.ct ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--l);max-width:640px}
+.ct a{display:flex;align-items:center;gap:1.1rem;padding:1.2rem .2rem;border-bottom:1px solid var(--l);text-decoration:none;min-height:68px}
+.ct svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--c);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ct small{display:block;color:var(--g);font-size:.9rem;line-height:1.2}
+.ct b{font-weight:500;font-size:clamp(1.1rem,3.6vw,1.45rem);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:2px;text-underline-offset:6px;overflow-wrap:anywhere}
+.ct a:hover b,.ct a:focus-visible b{text-decoration-color:var(--m)}
+.ct .ar{margin-left:auto;font-size:1.3rem;color:var(--g)}
+footer{padding:1.6rem 0 2.2rem;color:var(--gd);background:var(--c);font-size:.9rem}
+</style>
+</head>
+<body>
+
+<nav id="nav" aria-label="Principal"><div class="w">
+  <a href="#inicio" aria-label="Volver arriba"><img src="assets/isotipo.svg" alt="Pucela Visual"></a>
+  <ul>
+    <li><a href="#trabajos">Trabajos</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a class="cta" href="#contacto">Contacto</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="inicio">
+  <div class="lock">
+    <svg viewBox="-60 -56 120 112" role="img" aria-label="Pucela Visual">
+      <g class="a1"><g transform="rotate(-25) translate(-46,-37)"><path d="M7 46V7H85" fill="none" stroke="#ECEBE7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+      <g class="a2"><g transform="rotate(-25) translate(-46,-37)"><path d="M85 28V67H7" fill="none" stroke="#8B77A8" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+    </svg>
+    <div class="tx"><b class="t1">Pucela</b><span class="t2">Visual</span></div>
+  </div>
+  <svg class="chev" width="18" height="11" viewBox="0 0 16 10" aria-hidden="true"><path d="M1 1l7 7 7-7" fill="none" stroke="#A9ADAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</header>
+
+<main>
+<section id="trabajos"><div class="w">
+  <h2>Trabajos</h2>
+  <div class="gal" id="gal"></div>
+  <p class="soon" id="soon" hidden>Los primeros trabajos están en camino.</p>
+</div></section>
+
+<section id="nosotros" class="dark"><div class="w">
+  <h2>Nosotros</h2>
+  <div class="cols">
+    <p class="lead">Somos Pucela Visual, un estudio de fotografía y vídeo en Valladolid. Miramos con atención para capturar la esencia de cada lugar y de cada persona. Ayudamos a que tu negocio se vea tan bien como se siente.</p>
+    <div class="cr">
+      <div><h3>Crecer juntos</h3><p>Más que clientes, trabajamos con personas. Tú nos ayudas a crecer; nosotros, a ti. Juntos hacemos mejores trabajos.</p></div>
+      <div><h3>Menos es más</h3><p>No hace falta una gran producción para tener una buena imagen. Basta con luz, encuadre y cuidado.</p></div>
+      <div><h3>Mirar con atención</h3><p>Antes de disparar, encuadramos: decidimos qué importa y qué sobra.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="contacto" class="ct"><div class="w">
+  <h2>Contacto</h2>
+  <p>Cuéntanos qué tienes en mente.</p>
+  <ul>
+    <li><a href="https://www.instagram.com/pucelavisual" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg>
+      <span><small>Instagram</small><b>@pucelavisual</b></span><span class="ar" aria-hidden="true">→</span></a></li>
+    <li><a href="https://www.tiktok.com/@pucelavisual" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3c.4 2.7 2.1 4.3 5 4.6"/></svg>
+      <span><small>TikTok</small><b>@pucelavisual</b></span><span class="ar" aria-hidden="true">→</span></a></li>
+    <li><a href="mailto:pucelavisual@gmail.com">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>
+      <span><small>Correo</small><b>pucelavisual@gmail.com</b></span><span class="ar" aria-hidden="true">→</span></a></li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="w">© Pucela Visual · Valladolid</div></footer>
+
+<dialog id="lb" aria-label="Visor de fotos">
+  <div class="vis"><img id="li" alt=""><p id="lt"></p></div>
+  <span class="vc" id="lc"></span>
+  <button class="vb x" id="lx" type="button">Cerrar ✕</button>
+  <button class="vb pv" id="lp" type="button" aria-label="Foto anterior">‹</button>
+  <button class="vb nx" id="ln" type="button" aria-label="Foto siguiente">›</button>
+</dialog>
+
+<script src="galeria.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var hero=document.querySelector('.hero'),nav=$('nav');
+var started=false;function play(){if(started)return;started=true;hero.classList.add('go')}
+if(document.fonts&&document.fonts.load){document.fonts.load('500 1em Outfit').then(play,play)}
+setTimeout(play,1200);
+
+function bar(){nav.classList.toggle('on',window.scrollY>window.innerHeight*.5)}
+addEventListener('scroll',bar,{passive:true});bar();
+var links={};document.querySelectorAll('nav li a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var a=links[e.target.id];if(!a)return;
+    if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].removeAttribute('aria-current')});a.setAttribute('aria-current','true')}
+  })},{rootMargin:'-40% 0px -55% 0px'});
+  Object.keys(links).forEach(function(k){io.observe($(k))});
+}
+
+var fotos=(window.FOTOS||[]).map(function(f){return typeof f==='string'?{archivo:f}:f});
+var gal=$('gal');
+if(!fotos.length){
+  [[4,5],[1,1],[3,2],[3,2],[4,5],[1,1]].forEach(function(r){
+    var d=document.createElement('div');d.className='ph v';d.style.aspectRatio=r[0]+'/'+r[1];d.setAttribute('aria-hidden','true');gal.appendChild(d)});
+  $('soon').hidden=false;
+}else{
+  fotos.forEach(function(f,i){
+    var b=document.createElement('button');b.type='button';b.className='ph';b.setAttribute('aria-label',f.titulo||('Ver foto '+(i+1)));
+    var im=document.createElement('img');im.src='fotos/'+f.archivo;im.alt=f.titulo||'';im.loading='lazy';im.decoding='async';
+    b.appendChild(im);b.onclick=function(){abrir(i)};gal.appendChild(b);
+  });
+}
+
+var lb=$('lb'),cur=0;
+function ver(i){
+  cur=(i+fotos.length)%fotos.length;var f=fotos[cur];
+  $('li').src='fotos/'+f.archivo;$('li').alt=f.titulo||'';$('lt').textContent=f.titulo||'';
+  $('lc').textContent=fotos.length>1?(cur+1)+' / '+fotos.length:'';
+  $('lp').hidden=$('ln').hidden=fotos.length<2;
+}
+function abrir(i){ver(i);lb.showModal()}
+$('lx').onclick=function(){lb.close()};
+$('lp').onclick=function(){ver(cur-1)};$('ln').onclick=function(){ver(cur+1)};
+lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')ver(cur-1);if(e.key==='ArrowRight')ver(cur+1)});
+var x0=null;
+lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(d)>50)ver(cur+(d<0?1:-1))});
+})();
+</script>
+</body>
+</html>
